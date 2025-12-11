@@ -73,14 +73,14 @@ export default function TestPage() {
 
   if (showUserForm) {
     return (
-      <div className="min-h-screen bg-background py-8 md:py-12 px-4">
+      <div className="min-h-screen bg-gradient-to-br from-zinc-50 via-zinc-100 to-zinc-200 py-8 md:py-12 px-4">
         <UserInfoForm onSubmit={handleUserInfoSubmit} onBack={handleBack} />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background py-8 md:py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-zinc-50 via-zinc-100 to-zinc-200 py-8 md:py-12 px-4">
       <QuestionCard
         question={currentQuestion}
         currentQuestion={currentStep + 1}
