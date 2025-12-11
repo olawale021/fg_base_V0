@@ -67,7 +67,7 @@ export default function ResultsPage() {
 
   if (!mounted || !result) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-zinc-50 via-zinc-100 to-zinc-200 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <p className="text-muted-foreground">Loading...</p>
       </div>
     );
@@ -93,7 +93,7 @@ export default function ResultsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-50 via-zinc-100 to-zinc-200 py-8 md:py-12 px-4">
+    <div className="min-h-screen bg-background py-8 md:py-12 px-4">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8 md:mb-12">
@@ -198,7 +198,7 @@ export default function ResultsPage() {
           </CardHeader>
           <CardContent className="pt-0">
             <div className="flex items-center justify-between gap-2">
-              <span className="text-xs md:text-sm text-black font-semibold">Preferred learning format:</span>
+              <span className="text-xs md:text-sm text-foreground font-semibold">Preferred learning format:</span>
               <Badge variant="default" className="capitalize">
                 {result.q10}
               </Badge>
