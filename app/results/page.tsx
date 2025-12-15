@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { TestResponse } from '@/types';
 import { getScoreBandLabel, getScoreBandDescription } from '@/lib/scoring';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -95,6 +96,24 @@ export default function ResultsPage() {
   return (
     <div className="min-h-screen bg-background py-8 md:py-12 px-4">
       <div className="max-w-3xl mx-auto">
+        {/* Logo */}
+        <div className="mb-8 flex justify-center">
+          <Image
+            src="/logos/Founder Groundworks Transparent Blue.png"
+            alt="Founder Groundworks"
+            width={200}
+            height={64}
+            className="dark:hidden"
+          />
+          <Image
+            src="/logos/Founder Groundworks Transparent White.png"
+            alt="Founder Groundworks"
+            width={200}
+            height={64}
+            className="hidden dark:block"
+          />
+        </div>
+
         {/* Header */}
         <div className="text-center mb-8 md:mb-12">
           <h1 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4">

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import QuestionCard from '@/components/QuestionCard';
 import UserInfoForm from '@/components/UserInfoForm';
 import { questions } from '@/lib/questions';
@@ -73,14 +74,49 @@ export default function TestPage() {
 
   if (showUserForm) {
     return (
-      <div className="min-h-screen bg-background py-8 md:py-12 px-4">
+      <div className="min-h-screen bg-background pt-2 md:pt-4 pb-4 md:pb-6 px-4">
+        {/* Logo */}
+        <div className="max-w-2xl mx-auto mb-2 flex justify-center">
+          <Image
+            src="/logos/Founder Groundworks Transparent Blue.png"
+            alt="Founder Groundworks"
+            width={200}
+            height={64}
+            className="dark:hidden"
+          />
+          <Image
+            src="/logos/Founder Groundworks Transparent White.png"
+            alt="Founder Groundworks"
+            width={200}
+            height={64}
+            className="hidden dark:block"
+          />
+        </div>
         <UserInfoForm onSubmit={handleUserInfoSubmit} onBack={handleBack} />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background py-8 md:py-12 px-4">
+    <div className="min-h-screen bg-background pt-2 md:pt-4 pb-4 md:pb-6 px-4">
+      {/* Logo */}
+      <div className="max-w-2xl mx-auto mb-2 flex justify-center">
+        <Image
+          src="/logos/Founder Groundworks Transparent Blue.png"
+          alt="Founder Groundworks"
+          width={200}
+          height={64}
+          className="dark:hidden"
+        />
+        <Image
+          src="/logos/Founder Groundworks Transparent White.png"
+          alt="Founder Groundworks"
+          width={200}
+          height={64}
+          className="hidden dark:block"
+        />
+      </div>
+
       <QuestionCard
         question={currentQuestion}
         currentQuestion={currentStep + 1}

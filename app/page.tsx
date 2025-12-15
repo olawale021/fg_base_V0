@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Clock, FileText, BarChart3 } from "lucide-react";
@@ -7,6 +8,26 @@ export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <main className="flex flex-col items-center text-center max-w-2xl">
+        {/* Logo */}
+        <div className="mb-8 md:mb-12">
+          <Image
+            src="/logos/Founder Groundworks Transparent Blue.png"
+            alt="Founder Groundworks"
+            width={250}
+            height={80}
+            className="dark:hidden"
+            priority
+          />
+          <Image
+            src="/logos/Founder Groundworks Transparent White.png"
+            alt="Founder Groundworks"
+            width={250}
+            height={80}
+            className="hidden dark:block"
+            priority
+          />
+        </div>
+
         <div className="mb-8 animate-float-slow">
           <Badge variant="secondary" className="text-sm px-4 py-2 shadow-sm">
             1 minute to clarity

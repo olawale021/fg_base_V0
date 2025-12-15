@@ -25,7 +25,7 @@ export default function QuestionCard({
   const progressPercentage = (currentQuestion / totalQuestions) * 100;
 
   return (
-    <div className="w-full max-w-2xl mx-auto mt-44 md:mt-52">
+    <div className="w-full max-w-2xl mx-auto mt-4 md:mt-8">
       {/* Progress bar */}
       <div className="mb-6 md:mb-8">
         <div className="flex items-center justify-between mb-3">
