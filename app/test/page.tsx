@@ -74,7 +74,7 @@ export default function TestPage() {
 
   if (showUserForm) {
     return (
-      <div className="min-h-screen bg-background pt-2 md:pt-4 pb-4 md:pb-6 px-4">
+      <div className="min-h-screen bg-background pb-4 md:pb-6 px-4">
         {/* Logo */}
         <div className="max-w-2xl mx-auto mb-2 flex justify-center">
           <Image
@@ -98,7 +98,7 @@ export default function TestPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background pt-2 md:pt-4 pb-4 md:pb-6 px-4">
+    <div className="min-h-screen bg-background pb-4 md:pb-6 px-4">
       {/* Logo */}
       <div className="max-w-2xl mx-auto mb-2 flex justify-center">
         <Image
