@@ -14,16 +14,35 @@ export default function TestPage() {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Partial<TestAnswers>>({});
+  const [questionTexts, setQuestionTexts] = useState<Record<string, string>>({});
+  const [answerLabels, setAnswerLabels] = useState<Record<string, string>>({});
   const [showUserForm, setShowUserForm] = useState(false);
 
   const totalQuestions = questions.length;
   const currentQuestion = questions[currentStep];
 
   const handleSelect = (value: number | string) => {
+    // Find the label for the selected value
+    const selectedOption = currentQuestion.options.find(opt => opt.value === value);
+    const label = selectedOption?.label || String(value);
+
+    // Store the answer value (for scoring)
     setAnswers({
       ...answers,
       [currentQuestion.id]: value,
     } as Partial<TestAnswers>);
+
+    // Store the question text
+    setQuestionTexts({
+      ...questionTexts,
+      [currentQuestion.id]: currentQuestion.question,
+    });
+
+    // Store the answer label
+    setAnswerLabels({
+      ...answerLabels,
+      [currentQuestion.id]: label,
+    });
   };
 
   const handleNext = () => {
@@ -58,12 +77,41 @@ export default function TestPage() {
     // Store in sessionStorage to pass to results page
     sessionStorage.setItem('testResult', JSON.stringify(testResponse));
 
-    // TODO: Submit to API when backend is ready
-    // await fetch('/api/submit-test', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(testResponse),
-    // });
+    // Submit to Supabase with questions and answers (don't block navigation on error)
+    try {
+      await fetch('/api/submit-test', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...testResponse,
+          // Add question texts (q1, q2, etc.)
+          q1: questionTexts.q1,
+          q2: questionTexts.q2,
+          q3: questionTexts.q3,
+          q4: questionTexts.q4,
+          q5: questionTexts.q5,
+          q6: questionTexts.q6,
+          q7: questionTexts.q7,
+          q8: questionTexts.q8,
+          q9: questionTexts.q9,
+          q10: questionTexts.q10,
+          // Add answer labels (q1_label, q2_label, etc.)
+          q1_label: answerLabels.q1,
+          q2_label: answerLabels.q2,
+          q3_label: answerLabels.q3,
+          q4_label: answerLabels.q4,
+          q5_label: answerLabels.q5,
+          q6_label: answerLabels.q6,
+          q7_label: answerLabels.q7,
+          q8_label: answerLabels.q8,
+          q9_label: answerLabels.q9,
+          q10_label: answerLabels.q10,
+        }),
+      });
+    } catch (error) {
+      console.error('Failed to save test response:', error);
+      // Continue to results even if save fails
+    }
 
     // Navigate to results
     router.push('/results');
@@ -78,14 +126,14 @@ export default function TestPage() {
         {/* Logo */}
         <div className="max-w-2xl mx-auto mb-2 flex justify-center">
           <Image
-            src="/logos/Founder Groundworks Transparent Blue.png"
+            src="/logos/founder-groundworks-transparent-blue.png"
             alt="Founder Groundworks"
             width={200}
             height={64}
             className="dark:hidden"
           />
           <Image
-            src="/logos/Founder Groundworks Transparent White.png"
+            src="/logos/founder-groundworks-transparent-white.png"
             alt="Founder Groundworks"
             width={200}
             height={64}
@@ -102,14 +150,14 @@ export default function TestPage() {
       {/* Logo */}
       <div className="max-w-2xl mx-auto mb-2 flex justify-center">
         <Image
-          src="/logos/Founder Groundworks Transparent Blue.png"
+          src="/logos/founder-groundworks-transparent-blue.png"
           alt="Founder Groundworks"
           width={200}
           height={64}
           className="dark:hidden"
         />
         <Image
-          src="/logos/Founder Groundworks Transparent White.png"
+          src="/logos/founder-groundworks-transparent-white.png"
           alt="Founder Groundworks"
           width={200}
           height={64}

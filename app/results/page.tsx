@@ -32,34 +32,36 @@ export default function ResultsPage() {
   }, [router]);
 
   const handleSubscribe = async () => {
-    if (!result) return;
+    // Prevent multiple submissions
+    if (!result || isSubscribing || isSubscribed) return;
 
     setIsSubscribing(true);
 
     try {
-      // TODO: Call API to subscribe to email list
-      // await fetch('/api/subscribe-email', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({
-      //     email: result.email,
-      //     firstName: result.firstName,
-      //     lastName: result.lastName,
-      //     learningFormat: result.q10,
-      //     scoreBand: result.scoreBand,
-      //   }),
-      // });
+      const response = await fetch('/api/subscribe-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: result.email,
+          firstName: result.firstName,
+          lastName: result.lastName,
+        }),
+      });
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Something went wrong');
+      }
 
       setIsSubscribed(true);
-      toast.success('Successfully subscribed!', {
-        description: 'Check your inbox for your first lesson',
+      toast.success('Welcome aboard!', {
+        description: 'Check your inbox for your first founder lesson',
       });
     } catch (error) {
-      toast.error('Subscription failed', {
-        description: 'Please try again later',
+      const errorMessage = error instanceof Error ? error.message : 'Something went wrong. Please try again.';
+      toast.error('Oops!', {
+        description: errorMessage,
       });
     } finally {
       setIsSubscribing(false);
@@ -99,14 +101,14 @@ export default function ResultsPage() {
         {/* Logo */}
         <div className="mb-8 flex justify-center">
           <Image
-            src="/logos/Founder Groundworks Transparent Blue.png"
+            src="/logos/founder-groundworks-transparent-blue.png"
             alt="Founder Groundworks"
             width={200}
             height={64}
             className="dark:hidden"
           />
           <Image
-            src="/logos/Founder Groundworks Transparent White.png"
+            src="/logos/founder-groundworks-transparent-white.png"
             alt="Founder Groundworks"
             width={200}
             height={64}
@@ -187,9 +189,9 @@ export default function ResultsPage() {
               <div className="text-center space-y-3 md:space-y-4">
                 <Button
                   onClick={handleSubscribe}
-                  disabled={isSubscribing}
+                  disabled={isSubscribing || isSubscribed}
                   size="lg"
-                  className="text-xs md:text-base px-4 md:px-8 py-4 md:py-6 rounded-full shadow-lg w-full md:w-auto leading-tight"
+                  className="text-xs md:text-base px-4 md:px-8 py-4 md:py-6 rounded-full shadow-lg w-full md:w-auto leading-tight disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubscribing
                     ? 'Subscribing...'
@@ -203,7 +205,7 @@ export default function ResultsPage() {
               <Alert className="border-green-200 bg-green-50 dark:bg-green-950/30 dark:border-green-900">
                 <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />
                 <AlertDescription className="text-green-800 dark:text-green-300 font-semibold ml-2">
-                  Successfully subscribed! Check your inbox for your first lesson.
+                  You&apos;re all set! Check your inbox for your first founder lesson.
                 </AlertDescription>
               </Alert>
             )}

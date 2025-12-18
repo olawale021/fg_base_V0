@@ -11,7 +11,7 @@ export default function Home() {
         {/* Logo */}
         <div className="mb-6 md:mb-8">
           <Image
-            src="/logos/Founder Groundworks Transparent Blue.png"
+            src="/logos/founder-groundworks-transparent-blue.png"
             alt="Founder Groundworks"
             width={250}
             height={80}
@@ -19,7 +19,7 @@ export default function Home() {
             priority
           />
           <Image
-            src="/logos/Founder Groundworks Transparent White.png"
+            src="/logos/founder-groundworks-transparent-white.png"
             alt="Founder Groundworks"
             width={250}
             height={80}
