@@ -9,6 +9,7 @@ export async function POST(request: NextRequest) {
       firstName,
       lastName,
       email,
+      location,
       q1,
       q2,
       q3,
@@ -38,6 +39,7 @@ export async function POST(request: NextRequest) {
       !firstName ||
       !lastName ||
       !email ||
+      !location ||
       !q1 ||
       !q2 ||
       !q3 ||
@@ -90,6 +92,7 @@ export async function POST(request: NextRequest) {
         first_name: firstName,
         last_name: lastName,
         email: email,
+        location: location,
         q1,
         q1_label,
         q2,

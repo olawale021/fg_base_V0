@@ -95,10 +95,7 @@ export const questions: Question[] = [
     question: 'Preferred learning format',
     options: [
       { label: 'Short Lessons', value: 'lessons' },
-      { label: 'Articles', value: 'articles' },
       { label: 'Stories', value: 'stories' },
-      { label: 'Debates', value: 'debates' },
-      { label: 'Conversations', value: 'conversations' },
     ],
     isScored: false,
   },

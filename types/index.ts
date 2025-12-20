@@ -1,4 +1,4 @@
-export type LearningFormat = 'lessons' | 'articles' | 'stories' | 'debates' | 'conversations';
+export type LearningFormat = 'lessons' | 'stories';
 
 export type ScoreBand = 'early-stage' | 'developing' | 'strong' | 'ready';
 
@@ -19,6 +19,7 @@ export interface UserInfo {
   firstName: string;
   lastName: string;
   email: string;
+  location: string;
 }
 
 export interface TestResponse extends TestAnswers, UserInfo {

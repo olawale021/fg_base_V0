@@ -45,6 +45,7 @@ export default function ResultsPage() {
           email: result.email,
           firstName: result.firstName,
           lastName: result.lastName,
+          location: result.location,
         }),
       });
 
@@ -184,8 +185,17 @@ export default function ResultsPage() {
 
             <Separator className="my-6 md:my-8" />
 
-            {/* CTA */}
-            {!isSubscribed ? (
+            {/* CTA or High Scorer Message */}
+            {result.baseScore >= 87 ? (
+              <div className="text-center space-y-3 md:space-y-4 px-4">
+                <h3 className="text-lg md:text-xl font-semibold">
+                  You&apos;re already founder-ready.
+                </h3>
+                <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
+                  Your score indicates you&apos;ve already developed the core competencies this program teaches. Our curriculum is designed for founders earlier in their journey who are building these fundamentals. You&apos;re beyond our target scope.
+                </p>
+              </div>
+            ) : !isSubscribed ? (
               <div className="text-center space-y-3 md:space-y-4">
                 <Button
                   onClick={handleSubscribe}

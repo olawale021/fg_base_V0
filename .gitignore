@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+add-location-column.sql
+high-scorer-messages.md
+MOBILE_API_ENDPOINTS.md
+MOBILE_APP_ARCHITECTURE.md
+MOBILE_USER_FLOW.md
+sample-content-schema.sql

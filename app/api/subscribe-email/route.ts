@@ -10,10 +10,10 @@ mailchimp.setConfig({
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, firstName, lastName } = body;
+    const { email, firstName, lastName, location } = body;
 
     // Validate required fields
-    if (!email || !firstName || !lastName) {
+    if (!email || !firstName || !lastName || !location) {
       return NextResponse.json(
         { error: 'Please fill in all fields to continue' },
         { status: 400 }
@@ -38,6 +38,7 @@ export async function POST(request: NextRequest) {
         merge_fields: {
           FNAME: firstName,
           LNAME: lastName,
+          COUNTRY: location,
         },
         tags: process.env.MAILCHIMP_TAG ? [process.env.MAILCHIMP_TAG] : [],
       }
@@ -59,32 +60,53 @@ export async function POST(request: NextRequest) {
       title?: string;
       detail?: string;
       message?: string;
+      response?: {
+        body?: {
+          title?: string;
+          detail?: string;
+          status?: number;
+        };
+      };
     };
+
+    // Extract error details from response body if available
+    const errorTitle = mailchimpError.title || mailchimpError.response?.body?.title;
+    const errorDetail = mailchimpError.detail || mailchimpError.response?.body?.detail;
+    const errorStatus = mailchimpError.status || mailchimpError.response?.body?.status;
 
     // Log detailed error for debugging
     console.error('Mailchimp subscription error:', {
-      status: mailchimpError.status,
-      title: mailchimpError.title,
-      detail: mailchimpError.detail,
+      status: errorStatus,
+      title: errorTitle,
+      detail: errorDetail,
       message: mailchimpError.message,
     });
 
     // Handle specific Mailchimp errors with user-friendly messages
-    if (mailchimpError.status === 400 && mailchimpError.title === 'Member Exists') {
+    if (errorStatus === 400 && errorTitle === 'Member Exists') {
       return NextResponse.json(
         { error: 'Good news! You\'re already subscribed to our mailing list.' },
         { status: 400 }
       );
     }
 
-    if (mailchimpError.status === 400 && mailchimpError.title === 'Invalid Resource') {
+    // Check if error message or detail contains "already a list member"
+    const errorText = `${errorTitle} ${errorDetail} ${mailchimpError.message}`.toLowerCase();
+    if (errorText.includes('already') || errorText.includes('member exists') || errorText.includes('is already a list member')) {
+      return NextResponse.json(
+        { error: 'Good news! You\'re already subscribed to our mailing list.' },
+        { status: 400 }
+      );
+    }
+
+    if (errorStatus === 400 && errorTitle === 'Invalid Resource') {
       return NextResponse.json(
         { error: 'Please enter a valid email address' },
         { status: 400 }
       );
     }
 
-    if (mailchimpError.status === 401 || mailchimpError.status === 403) {
+    if (errorStatus === 401 || errorStatus === 403) {
       console.error('Authentication error - check API credentials');
       return NextResponse.json(
         { error: 'Oops! Something went wrong. Please try again later.' },
