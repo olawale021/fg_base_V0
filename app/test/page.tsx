@@ -77,9 +77,9 @@ export default function TestPage() {
     // Store in sessionStorage to pass to results page
     sessionStorage.setItem('testResult', JSON.stringify(testResponse));
 
-    // Submit to Supabase with questions and answers (don't block navigation on error)
+    // Submit to Supabase with questions and answers - wait for completion
     try {
-      await fetch('/api/submit-test', {
+      const response = await fetch('/api/submit-test', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -108,9 +108,17 @@ export default function TestPage() {
           q10_label: answerLabels.q10,
         }),
       });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit test');
+      }
+
+      // Minimum delay to show loading state (500ms)
+      await new Promise(resolve => setTimeout(resolve, 500));
     } catch (error) {
       console.error('Failed to save test response:', error);
       // Continue to results even if save fails
+      await new Promise(resolve => setTimeout(resolve, 500));
     }
 
     // Navigate to results

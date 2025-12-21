@@ -80,8 +80,8 @@ export default function UserInfoForm({ onSubmit, onBack }: UserInfoFormProps) {
     },
   });
 
-  const handleSubmit = (values: z.infer<typeof formSchema>) => {
-    onSubmit(values);
+  const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+    await onSubmit(values);
   };
 
   return (
