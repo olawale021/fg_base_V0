@@ -7,9 +7,9 @@ import { Clock, FileText, BarChart3 } from "lucide-react";
 export default function Home() {
   return (
     <div className="flex min-h-screen items-start justify-center bg-background px-4">
-      <main className="flex flex-col items-center text-center max-w-2xl">
+      <main className="flex flex-col items-center text-center max-w-2xl pt-0">
         {/* Logo */}
-        <div className="mb-6 md:mb-8">
+        <div className="mb-6 md:mb-8 mt-0">
           <Image
             src="/logos/founder-groundworks-transparent-blue.png"
             alt="Founder Groundworks"

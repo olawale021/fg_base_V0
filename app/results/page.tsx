@@ -97,7 +97,7 @@ export default function ResultsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background py-8 md:py-12 px-4">
+    <div className="min-h-screen bg-background pb-8 md:pb-12 px-4">
       <div className="max-w-3xl mx-auto">
         {/* Logo */}
         <div className="mb-8 flex justify-center">

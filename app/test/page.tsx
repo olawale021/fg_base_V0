@@ -132,7 +132,7 @@ export default function TestPage() {
     return (
       <div className="min-h-screen bg-background pb-4 md:pb-6 px-4">
         {/* Logo */}
-        <div className="max-w-2xl mx-auto mb-2 flex justify-center">
+        <div className="max-w-2xl mx-auto mb-2 flex justify-center pt-0">
           <Image
             src="/logos/founder-groundworks-transparent-blue.png"
             alt="Founder Groundworks"
@@ -156,7 +156,7 @@ export default function TestPage() {
   return (
     <div className="min-h-screen bg-background pb-4 md:pb-6 px-4">
       {/* Logo */}
-      <div className="max-w-2xl mx-auto mb-2 flex justify-center">
+      <div className="max-w-2xl mx-auto mb-2 flex justify-center pt-0">
         <Image
           src="/logos/founder-groundworks-transparent-blue.png"
           alt="Founder Groundworks"
