@@ -169,14 +169,16 @@ export default function UserInfoForm({ onSubmit, onBack }: UserInfoFormProps) {
               type="button"
               variant="outline"
               onClick={onBack}
+              disabled={form.formState.isSubmitting}
             >
               Back
             </Button>
             <Button
               type="submit"
               className="flex-1"
+              disabled={form.formState.isSubmitting}
             >
-              See My Results
+              {form.formState.isSubmitting ? 'Submitting...' : 'See My Results'}
             </Button>
           </div>
         </form>
