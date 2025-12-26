@@ -41,6 +41,7 @@ yarn-error.log*
 next-env.d.ts
 add-location-column.sql
 
+
 high-scorer-messages.md
 MOBILE_API_ENDPOINTS.md
 MOBILE_APP_ARCHITECTURE_V2.md
@@ -48,5 +49,13 @@ MOBILE_APP_ARCHITECTURE.md
 MOBILE_IMPLEMENTATION_PLAN_V1.md
 MOBILE_SUPABASE_API_GUIDE.md
 MOBILE_USER_FLOW.md
-sample-content-schema.sql
 SUPABASE_EDGE_FUNCTIONS.md
+TEST_RESPONSES_ARCHITECTURE.md
+WEAK_AREAS_IMPLEMENTATION.md
+sample-content-schema.sql
+migrations/001_minimal_weak_areas_tables.sql
+migrations/002_weak_areas_system.sql
+migrations/003_web_test_responses.sql
+migrations/004_fix_analyze_weak_areas_cache.sql
+migrations/add_user_id_to_test_responses.sql
+migrations/README.md

@@ -85,9 +85,9 @@ export async function POST(request: NextRequest) {
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
 
-    // Insert test response into database
+    // Insert web test response into database (for anonymous users)
     const { data, error } = await supabase
-      .from('test_responses')
+      .from('web_test_responses')
       .insert({
         first_name: firstName,
         last_name: lastName,
